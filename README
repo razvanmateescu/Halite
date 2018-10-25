@@ -1,0 +1,67 @@
+INSTRUCTIUNI DE COMPILARE
+
+make build -> pentru a crea fisierul MyBot.class.
+
+make run -> pentru un joc 1v1 cu botul impotriva lui insusi.
+
+make clean -> pentru a sterge fisierele *.log si fisierul MyBot.class rezultat.
+
+
+STRUCTURA PROIECTULUI
+
+Codul a fost implementat in MyBot.java, in folderul hlt/ aflandu-se biblioteca cu fisierele
+java ale StarterKit-ului.
+
+
+ABORDAREA ALGORITMICA
+
+*** ETAPA 1 ***
+
+Deoarece StarterKit-ul ocupa relativ bine planetele, insa avea probleme cu coliziuni, ne-am 
+concentrat pe evitarea coliziunilor intre navele proprii in felul urmator: Am parcurs intr-un
+for in for pentru fiecare nava si am verificat daca distanta dintre acestea este mai mica 
+decat o valoarea prestabilita, caz in care am oprit una din nave si am adaugat-o intr-un 
+ArrayList numit stoppedShips, iar in momentul in care decideam pentru fiecare nava catre ce planeta
+sa fie indreptata, nu luam in calcul navele care se aflau in ArrayList-ul de nave oprite.
+
+La partea de ocupare de planete, intr-un for pentru nave, intr-un for pentru planete, 
+trimitem navele nedockate si neoprite catre cate o planeta neocupata.
+
+*** ETAPA 2 ***
+
+Am realizat ca botii mediocrii nu se apara impotriva unei strategii de tip RUSH, asa ca am decis sa 
+folosim acest tip de tactica.
+
+Tactica de tip RUSH inseamna ca noi nu ne focusam pe cucerirea planetelor (deloc), in schimb,
+incercam sa exterminam navele inamicului in stadiul incipient. Distribuim fiecare nava a noastra
+fiecarei nave adverse si incercam sa le exterminam cat timp sunt in stadiul "Docking" (ideal) sau
+pana ca planeta pe care au dockat-o sa produca o alta nava.
+
+Minusurile acestei tactici provin evident din faptul ca din cauza distantei mari dintre navele
+noastre si navele inamice, inamicul are sansa sa genereze alte nave si sa ne ucida usor, deoarece 
+noi nu dockam si nu producem nave.
+
+*** ETAPA 3 ***
+
+Permitem unele coliziuni pentru a facilita o mai buna miscare a navelor. Din cauza modului cu care evitam coliziunile inainte, navele se blocau si se miscau sacadat, lucru care ducea la "pierderea startului".
+
+In functie de entitatea care este mai aproape, ocupam planete si atacam nave inamice. In momentul in care avem un numar prestabilit de nave, trimitem o nava in coltul cel mai apropiat, pentru a ne asigura locul 2. Aceasta strategie ne asigura aproape mereu locul al doilea. Din pacate, exista cazuri in care pierdem inainte sa ajungem la acest pas (adversarul face RUSH).
+
+
+SURSE DE INSPIRATIE
+
+Forumurile de halite: https://forums.halite.io/
+Videoclipuri cu jucatori de halite de pe youtube.com
+
+
+RESPONSABILITATEA FIECARUI MEMBRU
+
+Ciceasa Sorin Gabriel -- Research si propuneri tactici de algoritm
+Mateescu Razvan -- Research si propuneri tactici de algoritm
+Visan Mihai-Damian -- Scris cod si testat
+Vochescu Alexandru -- Research si propuneri tactici de algoritm
+
+
+UPDATE-URI PENTRU FINALA
+    - tactica diferita in functie de numarul de jucatori
+    - strategie anti RUSH
